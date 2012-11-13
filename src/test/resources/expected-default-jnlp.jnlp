@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<jnlp spec="1.0" href="test-default.jnlp">
+
+    <information>
+
+        <title>Test Title</title>
+        <vendor>Test Vendor</vendor>
+                                        
+    </information>
+
+    <security>
+        <all-permissions/>
+    </security>
+
+    <resources>
+        <j2se version="1.7+" />
+        <jar href="test-jar-file.jar"/>
+    </resources>
+
+    <application-desc main-class="com.test.TestMainClass"/>
+
+</jnlp>

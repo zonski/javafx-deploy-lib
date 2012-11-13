@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<jnlp spec="1.0" href="${config.jnlpFileName}">
+
+    <information>
+
+        <title>${config.title}</title>
+        <vendor>${config.vendor}</vendor>
+        #if(${config.description})<description>${config.description}</description>#end
+        #if(${config.homepage})<homepage href="${config.homepage}"/>#end
+        #if(${config.icon})<icon href="${config.icon}"/>#end
+        #if(${config.splashImage})<icon kind="splash" href="${config.splashImage}"/>#end
+        #if(${config.offlineAllowed})<offline-allowed/> #end
+
+    </information>
+
+    <security>
+        <all-permissions/>
+    </security>
+
+    <resources>
+        <j2se version="${config.jreVersion}" #if(${config.jreArgs})#endjava-vm-args="${config.jreArgs}"#end/>
+        <jar href="${config.jarFile}"/>
+    </resources>
+
+    <application-desc main-class="${config.mainClass}"/>
+
+</jnlp>
