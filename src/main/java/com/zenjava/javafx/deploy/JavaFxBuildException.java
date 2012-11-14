@@ -15,17 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zenjava.javafx.deploy.webstart;
+package com.zenjava.javafx.deploy;
 
-import com.zenjava.javafx.deploy.JavaFxBundleException;
+public class JavaFxBuildException extends RuntimeException {
 
-public class WebstartBundleException extends JavaFxBundleException {
-
-    public WebstartBundleException(String message) {
+    public JavaFxBuildException(String message) {
         super(message);
     }
 
-    public WebstartBundleException(String message, Throwable cause) {
+    public JavaFxBuildException(String message, Throwable cause) {
         super(message, cause);
     }
 }

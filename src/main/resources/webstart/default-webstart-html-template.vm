@@ -1,0 +1,18 @@
+<html>
+
+<body>
+
+    <h1>${config.title}</h1>
+    <p>by ${config.vendor}</p>
+
+    #if(${config.description})
+        <p>${config.description}</p>
+    #end
+
+    <p>
+        <a href="${config.jnlpFileName}">Click here to launch</a>
+    </p>
+
+</body>
+
+</html>

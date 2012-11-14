@@ -15,15 +15,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.zenjava.javafx.deploy;
+package com.zenjava.javafx.deploy.template;
 
-public class JavaFxBundleException extends RuntimeException {
+import com.zenjava.javafx.deploy.JavaFxBuildException;
 
-    public JavaFxBundleException(String message) {
+public class TemplateException extends JavaFxBuildException {
+
+    public TemplateException(String message) {
         super(message);
     }
 
-    public JavaFxBundleException(String message, Throwable cause) {
+    public TemplateException(String message, Throwable cause) {
         super(message, cause);
     }
 }

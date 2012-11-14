@@ -19,19 +19,16 @@ package com.zenjava.javafx.deploy.webstart;
 
 import com.zenjava.javafx.deploy.log.Log;
 import com.zenjava.javafx.deploy.log.SimpleLog;
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
+import com.zenjava.javafx.deploy.template.TemplateProcessor;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WebstartBundler {
 
     private Log log;
-    private VelocityEngine velocityEngine;
+    private TemplateProcessor templateProcessor;
 
     public WebstartBundler() {
         this(Log.LogLevel.info);
@@ -43,76 +40,78 @@ public class WebstartBundler {
 
     public WebstartBundler(Log log) {
         this.log = log;
+        this.templateProcessor = new TemplateProcessor(log);
     }
 
-    public void bundle(WebstartBundleConfig config) throws WebstartBundleException {
+    public void bundle(WebstartBundleConfig config) throws WebstartBundlerException {
 
-        log.info("Creating 'Webstart' bundle");
+        log.info("Creating Webstart bundle");
 
         validate(config);
 
-        // initialise velocity template engine
+        // pass entire config objject to template engine to use as token replacements
 
-        log.debug("Initialising velocity engine");
-        velocityEngine = new VelocityEngine();
-        velocityEngine.setProperty("resource.loader", "file");
-        velocityEngine.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
-        velocityEngine.setProperty("file.resource.loader.path", "");
-        velocityEngine.init();
+        Map<String, Object> values = new HashMap<String, Object>();
+        values.put("config", config);
 
+        // generate the JNLP velocity template
 
-        // create base output directory
+        log.info("Generating JNLP file for Webstart Bundle");
 
-        log.debug("Creating base output directory: '%s'", config.getOutputDir());
-        File jnlpFile = new File(config.getOutputDir(), config.getJnlpFileName());
-        if (!jnlpFile.getParentFile().exists() && !jnlpFile.getParentFile().mkdirs()) {
-            throw new WebstartBundleException("Failed to create target directory for JNLP file '" + jnlpFile + "'");
-        }
-
-        // setup the JNLP velocity template
-
-        String templatePath;
+        String jnlpTemplatePath;
         if (config.getJnlpTemplate() != null) {
-            templatePath = config.getJnlpTemplate().getPath();
-            log.debug("Using custom JNLP velocity template: '%s'", templatePath);
+            jnlpTemplatePath = config.getJnlpTemplate().getPath();
+            log.debug("Using custom JNLP velocity template: '%s'", jnlpTemplatePath);
         } else {
-            templatePath = getClass().getResource("/default-jnlp-template.vm").getPath();
-            log.debug("Using default JNLP velocity template: '%s'", templatePath);
+            jnlpTemplatePath = "classpath:/webstart/default-jnlp-template.vm";
+            log.debug("Using default JNLP velocity template: '%s'", jnlpTemplatePath);
         }
-        Template template = velocityEngine.getTemplate(templatePath);
-        VelocityContext context = new VelocityContext();
-        context.put("config", config);
 
-        // generate the JNLP using the velocity template
-
-        log.info("Generating JNLP file using template '%s', output file is '%s'", templatePath, jnlpFile);
-        PrintWriter out = null;
-        try {
-            out = new PrintWriter(new FileWriter(jnlpFile));
-            template.merge(context, out);
-        } catch (IOException e){
-            throw new WebstartBundleException("Failed to create JNLP file from template '" + jnlpFile + "'", e);
-        } finally {
-            if (out != null) {
-                out.close();
-            }
-        }
+        File jnlpFile = new File(config.getOutputDir(), config.getJnlpFileName());
+        templateProcessor.processTemplate(jnlpFile, jnlpTemplatePath, values);
 
         log.info("Successfully generated JNLP file at '%s'", jnlpFile);
+
+
+        // generate the HTML file (if required)
+
+        if (config.isBuildHtmlFile()) {
+
+            log.info("Generating HTML file for Webstart Bundle");
+
+            String htmlTemplatePath;
+            if (config.getJnlpTemplate() != null) {
+                htmlTemplatePath = config.getJnlpTemplate().getPath();
+                log.debug("Using custom Webstart HTML velocity template: '%s'", htmlTemplatePath);
+            } else {
+                htmlTemplatePath = "classpath:/webstart/default-webstart-html-template.vm";
+                log.debug("Using default Webstart HTML velocity template: '%s'", htmlTemplatePath);
+            }
+
+            File htmlFile = new File(config.getOutputDir(), config.getHtmlFileName());
+            templateProcessor.processTemplate(htmlFile, htmlTemplatePath, values);
+
+            log.info("Successfully generated HTML file at '%s'", htmlFile);
+        }
+
     }
 
-    protected void validate(WebstartBundleConfig config) throws WebstartBundleException {
+    protected void validate(WebstartBundleConfig config) throws WebstartBundlerException {
 
-        log.debug("Validating Webstart config");
+        log.debug("Validating JNLP config");
         assertNotNull("title", config.getTitle());
         assertNotNull("vendor", config.getVendor());
         assertNotNull("mainClass", config.getMainClass());
         assertNotNull("jarFile", config.getJarFile());
+
+        if (config.isBuildHtmlFile()) {
+            assertNotNull("htmlFileName", config.getHtmlFileName());
+        }
     }
 
-    private void assertNotNull(String key, Object value) throws WebstartBundleException {
+    private void assertNotNull(String key, Object value) throws WebstartBundlerException {
         if (value == null) {
-            throw new WebstartBundleException("A value must be set for '" + key + "'");
+            throw new WebstartBundlerException("A value must be set for '" + key + "'");
         }
     }
 }

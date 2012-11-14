@@ -23,7 +23,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 
-public class TestBuildWebstartBundleAction {
+public class TestWebstartBundler {
 
     @Test
     public void testDefaultTemplate() throws Exception {

@@ -36,6 +36,16 @@ public class WebstartBundleConfig {
     private String jarFile;
     private String mainClass;
 
+    private boolean buildHtmlFile;
+    private String htmlTemplate;
+    private String htmlFileName;
+
+    public WebstartBundleConfig() {
+
+        this.jreVersion = "1.7+";
+        this.offlineAllowed = false;
+    }
+
     public WebstartBundleConfig(File outputDir,
                                 String jnlpFileName,
                                 File jnlpTemplate,
@@ -44,6 +54,7 @@ public class WebstartBundleConfig {
                                 String jarFile,
                                 String mainClass) {
 
+        this();
         this.outputDir = outputDir;
         this.jnlpFileName = jnlpFileName;
         this.jnlpTemplate = jnlpTemplate;
@@ -51,9 +62,6 @@ public class WebstartBundleConfig {
         this.vendor = vendor;
         this.jarFile = jarFile;
         this.mainClass = mainClass;
-
-        this.jreVersion = "1.7+";
-        this.offlineAllowed = false;
     }
 
     public File getOutputDir() {
@@ -166,5 +174,29 @@ public class WebstartBundleConfig {
 
     public void setMainClass(String mainClass) {
         this.mainClass = mainClass;
+    }
+
+    public boolean isBuildHtmlFile() {
+        return buildHtmlFile;
+    }
+
+    public void setBuildHtmlFile(boolean buildHtmlFile) {
+        this.buildHtmlFile = buildHtmlFile;
+    }
+
+    public String getHtmlTemplate() {
+        return htmlTemplate;
+    }
+
+    public void setHtmlTemplate(String htmlTemplate) {
+        this.htmlTemplate = htmlTemplate;
+    }
+
+    public String getHtmlFileName() {
+        return htmlFileName;
+    }
+
+    public void setHtmlFileName(String htmlFileName) {
+        this.htmlFileName = htmlFileName;
     }
 }
