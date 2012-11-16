@@ -102,7 +102,7 @@ public class WebstartBundler {
         assertNotNull("title", config.getTitle());
         assertNotNull("vendor", config.getVendor());
         assertNotNull("mainClass", config.getMainClass());
-        assertNotNull("jarFile", config.getJarFile());
+        assertNotNull("jarFile", config.getJarResources());
 
         if (config.isBuildHtmlFile()) {
             assertNotNull("htmlFileName", config.getHtmlFileName());

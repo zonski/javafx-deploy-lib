@@ -33,7 +33,8 @@ public class WebstartBundleConfig {
     private boolean offlineAllowed;
     private String jreVersion;
     private String jreArgs;
-    private String jarFile;
+    private String jfxVersion;
+    private String[] jarResources;
     private String mainClass;
 
     private boolean buildHtmlFile;
@@ -43,6 +44,7 @@ public class WebstartBundleConfig {
     public WebstartBundleConfig() {
 
         this.jreVersion = "1.7+";
+        this.jfxVersion = "2.2+";
         this.offlineAllowed = false;
     }
 
@@ -51,7 +53,7 @@ public class WebstartBundleConfig {
                                 File jnlpTemplate,
                                 String title,
                                 String vendor,
-                                String jarFile,
+                                String[] jarResources,
                                 String mainClass) {
 
         this();
@@ -60,7 +62,7 @@ public class WebstartBundleConfig {
         this.jnlpTemplate = jnlpTemplate;
         this.title = title;
         this.vendor = vendor;
-        this.jarFile = jarFile;
+        this.jarResources = jarResources;
         this.mainClass = mainClass;
     }
 
@@ -160,12 +162,20 @@ public class WebstartBundleConfig {
         this.jreArgs = jreArgs;
     }
 
-    public String getJarFile() {
-        return jarFile;
+    public String getJfxVersion() {
+        return jfxVersion;
     }
 
-    public void setJarFile(String jarFile) {
-        this.jarFile = jarFile;
+    public void setJfxVersion(String jfxVersion) {
+        this.jfxVersion = jfxVersion;
+    }
+
+    public String[] getJarResources() {
+        return jarResources;
+    }
+
+    public void setJarResources(String... jarResources) {
+        this.jarResources = jarResources;
     }
 
     public String getMainClass() {

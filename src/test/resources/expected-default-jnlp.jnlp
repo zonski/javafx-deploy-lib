@@ -9,13 +9,18 @@
                                         
     </information>
 
-    <security>
-        <all-permissions/>
-    </security>
+
 
     <resources>
         <j2se version="1.7+" />
+
+        
+        <jfx:javafx-runtime version="2.2+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+        
+
+        
         <jar href="test-jar-file.jar"/>
+        
     </resources>
 
     <application-desc main-class="com.test.TestMainClass"/>

@@ -14,13 +14,16 @@
 
     </information>
 
-    <security>
-        <all-permissions/>
-    </security>
-
     <resources>
-        <j2se version="${config.jreVersion}" #if(${config.jreArgs})#endjava-vm-args="${config.jreArgs}"#end/>
-        <jar href="${config.jarFile}"/>
+        <j2se version="${config.jreVersion}" #if(${config.jreArgs})java-vm-args="${config.jreArgs}"#end/>
+
+        #if(${config.jfxVersion})#**#
+        <jfx:javafx-runtime version="${config.jfxVersion}" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+        #end#**#
+
+        #foreach($jarResource in $config.jarResources)#**#
+        <jar href="${jarResource}"/>
+        #end#**#
     </resources>
 
     <application-desc main-class="${config.mainClass}"/>

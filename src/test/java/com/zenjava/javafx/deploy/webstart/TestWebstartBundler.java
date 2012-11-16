@@ -32,7 +32,7 @@ public class TestWebstartBundler {
         String jnlpFileName = "test-default.jnlp";
 
         WebstartBundleConfig config = new WebstartBundleConfig(outputDir, jnlpFileName, null, "Test Title",
-                "Test Vendor", "test-jar-file.jar", "com.test.TestMainClass");
+                "Test Vendor", new String[] {"test-jar-file.jar"}, "com.test.TestMainClass");
         WebstartBundler action = new WebstartBundler();
         action.bundle(config);
 
@@ -47,7 +47,7 @@ public class TestWebstartBundler {
         String jnlpFileName = "test-custom.jnlp";
         File jnlpTemplateFile = new File(getClass().getResource("/expected-custom-jnlp.jnlp").toURI());
         WebstartBundleConfig config = new WebstartBundleConfig(outputDir, jnlpFileName, jnlpTemplateFile, "Test Title",
-                "Test Vendor", "test-jar-file.jar", "com.test.TestMainClass");
+                "Test Vendor", new String[] {"test-jar-file.jar"}, "com.test.TestMainClass");
 
         WebstartBundler action = new WebstartBundler();
         action.bundle(config);
