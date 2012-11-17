@@ -62,7 +62,7 @@
 
     <scm>
         <connection>scm:git:git://github.com/zonski/javafx-deploy-lib.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:zonski/javafx-deploy-lib.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:zonski/javafx-deploy-lib.git</developerConnection>
         <url>https://github.com/zonski/javafx-deploy-lib.git</url>
     </scm>
 
