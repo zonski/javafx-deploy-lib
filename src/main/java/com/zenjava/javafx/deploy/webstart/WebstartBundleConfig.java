@@ -34,7 +34,9 @@ public class WebstartBundleConfig {
     private String jreVersion;
     private String jreArgs;
     private String jfxVersion;
+    private String jfxFallbackUrl;
     private String[] jarResources;
+    private boolean requiresAllPermissions;
     private String mainClass;
 
     private boolean buildHtmlFile;
@@ -170,6 +172,14 @@ public class WebstartBundleConfig {
         this.jfxVersion = jfxVersion;
     }
 
+    public String getJfxFallbackUrl() {
+        return jfxFallbackUrl;
+    }
+
+    public void setJfxFallbackUrl(String jfxFallbackUrl) {
+        this.jfxFallbackUrl = jfxFallbackUrl;
+    }
+
     public String[] getJarResources() {
         return jarResources;
     }
@@ -208,5 +218,13 @@ public class WebstartBundleConfig {
 
     public void setHtmlFileName(String htmlFileName) {
         this.htmlFileName = htmlFileName;
+    }
+
+    public boolean isRequiresAllPermissions() {
+        return requiresAllPermissions;
+    }
+
+    public void setRequiresAllPermissions(boolean requiresAllPermissions) {
+        this.requiresAllPermissions = requiresAllPermissions;
     }
 }
