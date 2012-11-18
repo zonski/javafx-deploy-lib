@@ -40,7 +40,7 @@ public class WebstartBundleConfig {
     private String mainClass;
 
     private boolean buildHtmlFile;
-    private String htmlTemplate;
+    private File htmlTemplate;
     private String htmlFileName;
 
     public WebstartBundleConfig() {
@@ -204,11 +204,11 @@ public class WebstartBundleConfig {
         this.buildHtmlFile = buildHtmlFile;
     }
 
-    public String getHtmlTemplate() {
+    public File getHtmlTemplate() {
         return htmlTemplate;
     }
 
-    public void setHtmlTemplate(String htmlTemplate) {
+    public void setHtmlTemplate(File htmlTemplate) {
         this.htmlTemplate = htmlTemplate;
     }
 
