@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<jnlp spec="1.0" href="${fileName}">
+
+    <information>
+
+        <title>${app.title}</title>
+        <vendor>${app.vendor}</vendor>
+        #if(${app.description})<description>${app.description}</description>#end
+        #if(${app.homepage})<homepage href="${app.homepage}"/>#end
+        #if(${app.icon})<icon href="${app.icon}"/>#end
+        #if(${app.splashImage})<icon kind="splash" href="${app.splashImage}"/>#end
+        #if(${app.offlineAllowed})<offline-allowed/> #end
+
+    </information>
+
+    <resources>
+        <j2se version="${app.jreVersion}" #if(${app.jreArgs}) java-vm-args="${app.jreArgs}" #end/>
+
+        #if(${app.jfxVersion})#**#
+        <jfx:javafx-runtime version="${app.jfxVersion}" #if(${app.jfxFallbackUrl})href="${app.jfxFallbackUrl}"#end/>
+        #end#**#
+
+        #foreach($jarResource in $app.jarResources)#**#
+        <jar href="${jarResource}"/>
+        #end#**#
+    </resources>
+
+    #if(!${app.permissions.isEmpty()})#**#
+        <security>
+            #foreach($permission in $app.permissions)#**#
+                <${permission}/>
+            #end#**#
+        </security>
+    #end#**#
+
+    <application-desc main-class="${app.mainClass}"/>
+
+</jnlp>

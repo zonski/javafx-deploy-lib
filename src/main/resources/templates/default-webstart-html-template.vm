@@ -5,10 +5,10 @@
     <script>
         function launchApplication() {
             dtjava.launch(            {
-                        url : '${config.jnlpFileName}'
+                        url : '${app.jnlpFileName}'
                     },
                     {
-                        javafx : '${config.jfxVersion}+'
+                        javafx : '${app.jfxVersion}+'
                     },
                     {}
             );
@@ -19,11 +19,11 @@
 
 <body>
 
-    <h1>${config.title}</h1>
-    <p>by ${config.vendor}</p>
+    <h1>${app.title}</h1>
+    <p>by ${app.vendor}</p>
 
-    #if(${config.description})
-        <p>${config.description}</p>
+    #if(${app.description})
+        <p>${app.description}</p>
     #end
 
     <p>

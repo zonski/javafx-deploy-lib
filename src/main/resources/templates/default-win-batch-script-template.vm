@@ -1,0 +1,10 @@
+@echo off
+
+REM Launch script for ${app.title}
+
+set APP_CP=.
+#foreach($jarResource in $app.jarResources)
+set APP_CP=%APP_CP%;${jarResource.replace("/", "\")}
+#end
+
+java -cp %APP_CP% ${app.mainClass}
