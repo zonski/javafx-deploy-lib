@@ -71,6 +71,10 @@
         <url>https://github.com/zonski/javafx-deploy-lib/issues</url>
     </issueManagement>
 
+    <properties>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.6</maven.compiler.source>
+    </properties>
 
     <dependencies>
 

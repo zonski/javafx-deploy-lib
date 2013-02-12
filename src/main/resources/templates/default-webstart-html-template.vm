@@ -8,7 +8,7 @@
                         url : '${app.jnlpFileName}'
                     },
                     {
-                        javafx : '${app.jfxVersion}+'
+                        javafx : '${app.jfxVersion}'
                     },
                     {}
             );

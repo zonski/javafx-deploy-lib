@@ -33,6 +33,7 @@ public class ApplicationProfile {
     private String[] permissions;
     private String[] jarResources;
     private String mainClass;
+    private String jnlpFileName;
 
     public ApplicationProfile() {
 
@@ -150,5 +151,13 @@ public class ApplicationProfile {
 
     public void setMainClass(String mainClass) {
         this.mainClass = mainClass;
+    }
+    
+    public String getJnlpFileName() {
+        return jnlpFileName;
+    }
+    
+    public void setJnlpFileName(String jnlpFileName) {
+        this.jnlpFileName = jnlpFileName;
     }
 }
