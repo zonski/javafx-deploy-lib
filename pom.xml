@@ -29,7 +29,7 @@
 
     <groupId>com.zenjava</groupId>
     <artifactId>javafx-deploy-lib</artifactId>
-    <version>1.2</version>
+    <version>1.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>JavaFX Deploy Library</name>
