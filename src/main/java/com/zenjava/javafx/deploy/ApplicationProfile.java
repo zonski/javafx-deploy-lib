@@ -34,6 +34,7 @@ public class ApplicationProfile {
     private String[] jarResources;
     private String mainClass;
     private String jnlpFileName;
+    private String preLoaderClass;
 
     public ApplicationProfile() {
 
@@ -159,5 +160,13 @@ public class ApplicationProfile {
     
     public void setJnlpFileName(String jnlpFileName) {
         this.jnlpFileName = jnlpFileName;
+    }
+
+    public String getPreLoaderClass() {
+        return preLoaderClass;
+    }
+
+    public void setPreLoaderClass(String preLoaderClass) {
+        this.preLoaderClass = preLoaderClass;
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<jnlp spec="1.0" href="${fileName}">
+<jnlp spec="1.0" href="${fileName}" xmlns:jfx="http://javafx.com">
 
     <information>
 
@@ -35,5 +35,8 @@
     #end#**#
 
     <application-desc main-class="${app.mainClass}"/>
-
+    #if(${app.preLoaderClass})
+        <jfx:javafx-desc width="800" height="600" main-class="${app.mainClass}"  name="${app.title}"
+                      preloader-class="${app.preLoaderClass}"/>
+    #end
 </jnlp>
